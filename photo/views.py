@@ -2,9 +2,21 @@ from django.views.generic.simple import direct_to_template, redirect_to
 from photos.photo.models import *
 from sorl.thumbnail import get_thumbnail
 
-def index(request):
+def index(request, year=None, month=None, day=None):
     p = Photo.objects.all()[0]
     im = get_thumbnail(p.img, '100x100')
+    if year:
+        if month:
+            if day:
+                photos = Photo.objects.filter(
+                    date__year=year, date__month=month, date__day=day)
+            else:
+                photos = Photo.objects.filter(
+                    date__year=year, date__month=month)
+        else:
+            photos = Photo.objects.filter(date__year=year)
+    else:
+        photos = Photo.objects.all()
     return direct_to_template(request, 'photo/index.html', {
-            'photos': Photo.objects.all(),
+            'photos': photos,
             })
