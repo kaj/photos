@@ -19,7 +19,8 @@ class Command(NoArgsCommand):
     help = 'Find and index photos.'
     
     def handle_noargs(self, **options):
-        for root, dirs, files in os.walk('/home/kaj/Bilder/foto/2010/02'):
+        base = '/home/kaj/Bilder/foto'
+        for root, dirs, files in os.walk(base + '/2010/02'):
             #print "Current directory", root
             #print "Sub directories", dirs
             #print "Files", files
@@ -33,7 +34,7 @@ class Command(NoArgsCommand):
                     model = exif['Model'])
                 print filename, date, camera
                 photo, is_new = Photo.objects.get_or_create(
-                    img = filename,
+                    img = filename.replace(base, 'orig'),
                     defaults = { 'date': date, 'camera': camera })
                 if not is_new:
                     photo.date = date;

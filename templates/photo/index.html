@@ -1,0 +1,37 @@
+<!doctype html>
+{% load thumbnail %}
+<html>
+  <head>
+    <title>index</title>
+    <style type="text/css">
+      div.photo.preview {
+      width: 120px;
+      display: inline-block;
+      border: solid 1px #aaaaaa;
+      margin: 0.4em;
+      padding: 0.2em;
+      }
+      div.photo.preview p {
+      text-align: center;
+      font-size: 80%;
+      margin: 0.2em 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>index</h1>
+    
+    {% for p in photos %}
+      <div class="photo preview">
+	<!-- {{p.img.path}} -->
+	{% thumbnail p.img "100x100" as im %}
+	<p><img src="{{im.url}}" width="{{im.width}}" height="{{im.height}}"/></p>
+	{% empty %}
+	<p>(no thumbnail)</p>
+	{% endthumbnail %}
+	<p>{{p.date}}</p>
+      </div>
+    {% endfor %}
+  </body>
+</html>
+

@@ -1,2 +1,4 @@
+files/cache
+files/orig
 *.pyc
 *~
