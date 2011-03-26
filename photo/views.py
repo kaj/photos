@@ -3,8 +3,6 @@ from photos.photo.models import *
 from sorl.thumbnail import get_thumbnail
 
 def index(request, year=None, month=None, day=None):
-    p = Photo.objects.all()[0]
-    im = get_thumbnail(p.img, '100x100')
     if year:
         if month:
             if day:
