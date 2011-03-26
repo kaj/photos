@@ -10,8 +10,8 @@ class Camera(models.Model):
 
 class Photo(models.Model):
     img = models.ImageField(upload_to='orig')
-    date = models.DateTimeField('orignial date')
-    camera = models.ForeignKey(Camera)
+    date = models.DateTimeField('orignial date', blank=True, null=True)
+    camera = models.ForeignKey(Camera, blank=True, null=True)
 
     def __unicode__(self):
         return u'%s (%s)' % (self.img, self.date)
