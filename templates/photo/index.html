@@ -2,7 +2,7 @@
 {% load thumbnail %}
 <html>
   <head>
-    <title>index</title>
+    <title>Bilder {{title}}</title>
     <style type="text/css">
       div.photo.preview {
       width: 120px;
@@ -19,7 +19,9 @@
     </style>
   </head>
   <body>
-    <h1>index</h1>
+    <h1>Bilder {{title}}</h1>
+    
+    <p>Showing {%if limit < count %}{{limit}} of{%endif%} {{count}} photos.</p>
     
     {% for p in photos %}
       <div class="photo preview">
