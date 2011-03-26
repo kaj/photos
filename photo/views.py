@@ -1,6 +1,19 @@
 from django.views.generic.simple import direct_to_template, redirect_to
 from photos.photo.models import *
 from sorl.thumbnail import get_thumbnail
+from django.db.models import Count, Min
+
+def overview(request):
+    bydate = Photo.objects.extra({'odate' : 'date(date)'}).values('odate')\
+        .annotate(n=Count('id'), ex=Min('id')).order_by('odate')
+    for d in bydate: 
+        date = d.get('odate')
+        d['photo'] = Photo.objects.get(id=d['ex'])
+        if date:
+            d['url'] = '/%4d/%02d/%02d/' % (date.year, date.month, date.day)
+    return direct_to_template(request, 'photo/overview.html', {
+            'dates': bydate,
+            })
 
 def index(request, year=None, month=None, day=None):
     if year:
