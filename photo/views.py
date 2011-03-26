@@ -35,7 +35,7 @@ def index(request, year=None, month=None, day=None):
 
     limit = 20
     count = photos.count()
-    photos = photos.all()[:limit]
+    photos = photos.order_by('date')[:limit]
     return direct_to_template(request, 'photo/index.html', {
             'title': title,
             'count': count,
