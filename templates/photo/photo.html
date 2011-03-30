@@ -1,0 +1,42 @@
+<!doctype html>
+{% load thumbnail %}
+<html>
+  <head>
+    <title>Bild #{{photo.id}}</title>
+    <style type="text/css">
+      div.photo.preview {
+      width: 120px;
+      display: inline-block;
+      border: solid 1px #aaaaaa;
+      margin: 0.4em;
+      padding: 0.2em;
+      }
+      div.photo.preview p {
+      text-align: center;
+      font-size: 80%;
+      margin: 0.2em 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Bild #{{photo.id}}</h1>
+    
+    <div class="photo">
+        <!-- {{photo.img.path}} -->
+        {% thumbnail photo.img "700x700" as im %}
+        <p><img src="{{im.url}}" width="{{im.width}}" height="{{im.height}}"/>
+        </p>
+        {% empty %}
+        <p>(no thumbnail)</p>
+        {% endthumbnail %}
+        <dl class="metadata">
+          <dt>Datum</dt>
+          <dd>{{photo.date}}</dd>
+          
+          <dt>Kamera</dt>
+          <dd>{{photo.camera}}</dd>
+        </dl>
+    </div>
+  </body>
+</html>
+

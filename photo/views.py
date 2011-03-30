@@ -42,3 +42,9 @@ def index(request, year=None, month=None, day=None):
             'limit': limit,
             'photos': photos,
             })
+
+def photo(request, id):
+    photo = Photo.objects.get(id=id)
+    return direct_to_template(request, 'photo/photo.html', {
+            'photo': photo,
+            })

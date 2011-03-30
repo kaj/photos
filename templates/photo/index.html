@@ -27,7 +27,8 @@
       <div class="photo preview">
 	<!-- {{p.img.path}} -->
 	{% thumbnail p.img "100x100" as im %}
-	<p><img src="{{im.url}}" width="{{im.width}}" height="{{im.height}}"/></p>
+        <p><a href="{{p.get_absolute_url}}"><img src="{{im.url}}"
+                  width="{{im.width}}" height="{{im.height}}"/></a></p>
 	{% empty %}
 	<p>(no thumbnail)</p>
 	{% endthumbnail %}
