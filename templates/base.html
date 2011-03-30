@@ -3,15 +3,25 @@
   <head>
     <title>{%block 'title'%}{%endblock%}</title>
     <style type="text/css">
+      body {
+      background: #aaaaaa;
+      }
+      div.photo {
+      background: #888888;
+      box-shadow: 2px 1px 1ex rgba(255,255,255,0.3);
+      padding: 0.2em;
+      margin: auto;
+      width: 750px;
+      }
       div.photo.preview {
       width: 120px;
       display: inline-block;
-      border: solid 1px #aaaaaa;
       margin: 0.4em;
-      padding: 0.2em;
+      }
+      div.photo p {
+      text-align: center;
       }
       div.photo.preview p {
-      text-align: center;
       font-size: 80%;
       margin: 0.2em 0;
       }
