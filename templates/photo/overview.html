@@ -1,24 +1,9 @@
-<!doctype html>
+{% extends 'base.html' %}
 {% load thumbnail %}
-<html>
-  <head>
-    <title>Bilder {{title}}</title>
-    <style type="text/css">
-      div.photo.preview {
-      width: 120px;
-      display: inline-block;
-      border: solid 1px #aaaaaa;
-      margin: 0.4em;
-      padding: 0.2em;
-      }
-      div.photo.preview p {
-      text-align: center;
-      font-size: 80%;
-      margin: 0.2em 0;
-      }
-    </style>
-  </head>
-  <body>
+
+{%block 'title'%}Bilder {{title}}{%endblock%}
+
+{%block main%}
     <h1>Bilder {{title}}</h1>
     
     {% for d in dates %}
@@ -37,6 +22,4 @@
         <p>{{d.odate}}: <a href="{{d.url}}">{{d.n}} bilder</a></p>
       </div>
     {% endfor %}
-  </body>
-</html>
-
+{%endblock%}
