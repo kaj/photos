@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{%block 'title'%}Taggar{%endblock%}
+
+{%block main%}
+    <h1>Taggar</h1>
+
+    <ul>
+      {% for tag in keywords %}
+        <li><a href="{{tag.name}}">{{tag.name}}</a> ({{tag.n}})</li>
+      {% endfor %}
+    </ul>
+
+    <h2>Personer</h2>
+    <ul>
+      {% for tag in people %}
+        <li><a href="who/{{tag.name}}">{{tag.name}}</a> ({{tag.n}})</li>
+      {% endfor %}
+    </ul>
+
+    <h2>Platser</h2>
+    <ul>
+      {% for tag in places %}
+        <li><a href="where/{{tag.name}}">{{tag.name}}</a> ({{tag.n}})</li>
+      {% endfor %}
+    </ul>
+{%endblock%}

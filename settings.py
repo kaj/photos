@@ -98,4 +98,5 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     
     'photo',
+    'tags',
 )
