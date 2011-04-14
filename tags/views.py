@@ -4,7 +4,9 @@ from photos.tags.models import *
 from photos.photo.models import *
 from sorl.thumbnail import get_thumbnail
 from django.db.models import Count, Min
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def overview(request):
     keywords = Keyword.objects.values('name').annotate(n=Count('keywordtag'))
     people = Person.objects.values('name').annotate(n=Count('persontag'))
@@ -15,6 +17,7 @@ def overview(request):
             'places': places,
             })
 
+@login_required
 def index(request, keyword=None, person=None, place=None):
     if keyword:
         photos = Photo.objects.filter(keywordtag__keyword__name=keyword)
@@ -36,10 +39,4 @@ def index(request, keyword=None, person=None, place=None):
             'count': count,
             'limit': limit,
             'photos': photos,
-            })
-
-def photo(request, id):
-    photo = Photo.objects.get(id=id)
-    return direct_to_template(request, 'photo/photo.html', {
-            'photo': photo,
             })

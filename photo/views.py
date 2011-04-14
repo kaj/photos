@@ -2,7 +2,9 @@ from django.views.generic.simple import direct_to_template, redirect_to
 from photos.photo.models import *
 from sorl.thumbnail import get_thumbnail
 from django.db.models import Count, Min
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def overview(request):
     bydate = Photo.objects.extra({'odate' : 'date(date)'}).values('odate')\
         .annotate(n=Count('id'), ex=Min('id')).order_by('odate')
@@ -15,6 +17,7 @@ def overview(request):
             'dates': bydate,
             })
 
+@login_required
 def index(request, year=None, month=None, day=None):
     if year:
         if month:
@@ -43,6 +46,7 @@ def index(request, year=None, month=None, day=None):
             'photos': photos,
             })
 
+@login_required
 def photo(request, id):
     photo = Photo.objects.get(id=id)
     return direct_to_template(request, 'photo/photo.html', {
