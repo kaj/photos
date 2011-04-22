@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def overview(request):
     bydate = Photo.objects.extra({'odate' : 'date(date)'}).values('odate')\
-        .annotate(n=Count('id'), ex=Min('id')).order_by('odate')
+        .annotate(n=Count('id'), ex=Min('id')).order_by('-odate')
     for d in bydate: 
         date = d.get('odate')
         d['photo'] = Photo.objects.get(id=d['ex'])
