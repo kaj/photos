@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load thumbnail %}
+{% load photo %}
 
 {%block 'title'%}Bilder {{title}}{%endblock%}
 
@@ -12,13 +12,7 @@
       {% endifchanged %}
 
       <div class="photo preview">
-	<!-- {{p.img.path}} -->
-	{% thumbnail d.photo.img "100x100" as im %}
-	  <p><img src="{{im.url}}" width="{{im.width}}" height="{{im.height}}"/></p>
-	{% empty %}
-	  <p>(no thumbnail)</p>
-	{% endthumbnail %}
-
+	<p>{% img d.photo %}</p>
         <p>{{d.odate}}: <a href="{{d.url}}">{{d.n}} bilder</a></p>
       </div>
     {% endfor %}

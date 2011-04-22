@@ -1,8 +1,9 @@
+from django.contrib.auth.decorators import login_required
+from django.db.models import Count, Min
+from django.http import HttpResponse
 from django.views.generic.simple import direct_to_template, redirect_to
 from photos.photo.models import *
 from sorl.thumbnail import get_thumbnail
-from django.db.models import Count, Min
-from django.contrib.auth.decorators import login_required
 
 @login_required
 def overview(request):
@@ -52,3 +53,9 @@ def photo(request, id):
     return direct_to_template(request, 'photo/photo.html', {
             'photo': photo,
             })
+
+@login_required
+def img(request, id, size):
+    photo = Photo.objects.get(id=id)
+    thumbnail = get_thumbnail(photo.img, "%sx%s" % (size, size))
+    return HttpResponse(thumbnail.read(), mimetype='image/jpeg')

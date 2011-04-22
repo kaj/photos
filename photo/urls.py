@@ -8,5 +8,6 @@ urlpatterns = patterns('',
         index, name='index_month'),
     url(r'^(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/$',
         index, name='index_day'),
-    url(r'^img(?P<id>[0-9]+)', photo, name='photo'),
+    url(r'^img(?P<id>[0-9]+)-(?P<size>[0-9]+).jpg', img, name='img'),
+    url(r'^img(?P<id>[0-9]+)$', photo, name='photo'),
 )

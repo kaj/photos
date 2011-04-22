@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load thumbnail %}
+{% load photo %}
 
 {%block 'title'%}Bild #{{photo.id}}{%endblock%}
 
@@ -7,13 +7,7 @@
     <h1>Bild #{{photo.id}}</h1>
     
     <div class="photo">
-        <!-- {{photo.img.path}} -->
-        {% thumbnail photo.img "700x700" as im %}
-        <p><img src="{{im.url}}" width="{{im.width}}" height="{{im.height}}"/>
-        </p>
-        {% empty %}
-        <p>(no thumbnail)</p>
-        {% endthumbnail %}
+        <p>{% img photo 700 %}</p>
         <dl class="metadata">
           <dt>Datum</dt>
           <dd>{{photo.date}}</dd>
