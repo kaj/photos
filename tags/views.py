@@ -25,11 +25,11 @@ def index(request, keyword=None, person=None, place=None):
         
     if person:
         photos = Photo.objects.filter(persontag__person__name=person)
-        title = u'Bilder på %s' % (person)
+        title = u'på %s' % (person)
 
     if place:
         photos = Photo.objects.filter(placetag__place__name=place)
-        title = u'Bilder från %s' % (person)
+        title = u'från %s' % (place)
 
     limit = 20
     count = photos.count()
