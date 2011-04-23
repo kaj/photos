@@ -17,6 +17,27 @@
 	  
 	  <dt>Upplösning</dt>
 	  <dd>{{photo.img.width}} × {{photo.img.height}} pixlar</dd>
+	  
+	  {% if photo.keywordtag_set.all %}
+	  <dt>Taggar</dt>
+	  <dd>{% for tag in photo.keywordtag_set.all %}
+	    <a href="{% url tag_index tag %}">{{tag}}</a>
+	    {% endfor %}</dd>
+	  {% endif %}
+
+	  {% if photo.persontag_set.all %}
+	  <dt>Personer</dt>
+	  <dd>{% for tag in photo.persontag_set.all %}
+	    <a href="{% url person_index tag %}">{{tag}}</a>
+	    {% endfor %}</dd>
+	  {% endif %}
+
+	  {% if photo.placetag_set.all %}
+	  <dt>Plats</dt>
+	  <dd>{% for tag in photo.placetag_set.all %}
+	    <a href="{% url place_index tag %}">{{tag}}</a>
+	    {% endfor %}</dd>
+	  {% endif %}
         </dl>
     </div>
 {%endblock%}
