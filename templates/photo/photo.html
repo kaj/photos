@@ -10,7 +10,10 @@
         <p>{% img photo 700 %}</p>
         <dl class="metadata">
           <dt>Datum</dt>
-          <dd>{{photo.date}}</dd>
+          {% with photo.date as d %}
+          <dd><a href="{{d|date:'/Y/m/d/'}}">{{d|date:'l j F Y'}}</a>
+            {{d|date:'H:i:s'}}</dd>
+          {% endwith %}
           
           <dt>Kamera</dt>
           <dd>{{photo.camera}}</dd>
