@@ -36,14 +36,21 @@ def index(request, year=None, month=None, day=None):
     else:
         photos = Photo.objects
         title = ''
+    
+    return show_index(request, photos, title)
 
-    limit = 20
+def show_index(request, photos, title='', limit=20):
+    low = int(request.GET.get('low', 0))
+    high = low + limit
     count = photos.count()
-    photos = photos.order_by('date')[:limit]
+    photos = photos.order_by('date')[low:high]
     return direct_to_template(request, 'photo/index.html', {
             'title': title,
             'count': count,
             'limit': limit,
+            'low': low,
+            'high': high,
+            'prev': max(0, low - limit),
             'photos': photos,
             })
 

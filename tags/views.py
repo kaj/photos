@@ -2,6 +2,7 @@
 from django.views.generic.simple import direct_to_template, redirect_to
 from photos.tags.models import *
 from photos.photo.models import *
+from photos.photo.views import show_index
 from sorl.thumbnail import get_thumbnail
 from django.db.models import Count, Min
 from django.contrib.auth.decorators import login_required
@@ -31,12 +32,4 @@ def index(request, keyword=None, person=None, place=None):
         photos = Photo.objects.filter(placetag__place__name=place)
         title = u'från %s' % (place)
 
-    limit = 20
-    count = photos.count()
-    photos = photos.order_by('date')[:limit]
-    return direct_to_template(request, 'photo/index.html', {
-            'title': title,
-            'count': count,
-            'limit': limit,
-            'photos': photos,
-            })
+    return show_index(request, photos, title)

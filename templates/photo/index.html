@@ -6,8 +6,15 @@
 {%block main%}
     <h1>Bilder {{title}}</h1>
     
-    <p>Showing {%if limit < count %}{{limit}} of{%endif%} {{count}} photos.</p>
+    <p>Showing {%if limit < count %}#{{low}} to #{{high}} of{%endif%}
+    {{count}} photos.</p>
+
     
+    <p>
+      {% if low %}<a href="?low={{prev}}">förra</a>{% endif %}
+      {% if high < count %}<a href="?low={{high}}">nästa</a>{% endif %}
+    </p>
+
     {% for p in photos %}
       <div class="photo preview">
 	<p><a href="{{p.get_absolute_url}}">{% img p %}</a></p>
