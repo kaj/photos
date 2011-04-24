@@ -5,18 +5,26 @@
     <style type="text/css">
       body {
       background: #aaaaaa;
+      padding-top: 1em;
       }
-      #whoami {
+      #whoami, #toplinks {
       position: absolute;
       top: 0;
-      right: 0;
       background: #888888;
-      padding: 0.2em 1em 0.2em 2em;
-      -moz-border-radius: 0 0 0 1.5em;
       box-shadow: 2px 1px 1ex rgba(255,255,255,0.3);
       }
-      #whoami p {
+      #whoami p, #toplinks p {
       margin: 0;
+      }
+      #whoami {
+      right: 0;
+      padding: 0.2em 1em 0.2em 2em;
+      -moz-border-radius: 0 0 0 1.5em;
+      }
+      #toplinks {
+      left: 0;
+      padding: 0.2em 2em 0.2em 1em;
+      -moz-border-radius: 0 0 1.5em 0;
       }
       div.photo {
       background: #888888;
@@ -55,6 +63,10 @@
       <p>{{user.get_full_name}} (<a href="{% url logout
       %}">logout</a>)</p>
       {% endif %}
+    </div>
+    <div id="toplinks">
+      <p><a href="{% url overview %}">kronologi</a>
+	<a href="{% url tags %}">taggar</a></p>
     </div>
     {%block main%}{%endblock%}
   </body>
