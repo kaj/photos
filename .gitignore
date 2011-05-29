@@ -2,3 +2,4 @@ files/cache
 files/orig
 *.pyc
 *~
+settings_local.py

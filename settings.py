@@ -10,6 +10,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+# Actual DB settings in settings_local.py
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -100,3 +101,5 @@ INSTALLED_APPS = (
     'photo',
     'tags',
 )
+
+from settings_local import *
