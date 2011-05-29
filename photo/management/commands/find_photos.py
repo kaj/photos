@@ -1,4 +1,5 @@
 from django.core.management.base import NoArgsCommand
+from django.conf import settings
 from photos.photo.models import *
 import os
 from os.path import join
@@ -35,8 +36,8 @@ class Command(NoArgsCommand):
     help = 'Find and index photos.'
     
     def handle_noargs(self, **options):
-        base = '/home/kaj/Bilder/foto'
-        for root, dirs, files in os.walk(base + '/2010'):
+        base = settings.PHOTO_STORAGE_BASE
+        for root, dirs, files in os.walk(base):
             #print "Current directory", root
             #print "Sub directories", dirs
             #print "Files", files
