@@ -1,7 +1,9 @@
 from django.core.management.base import NoArgsCommand
+from django.conf import settings
 from xml.dom import minidom
 from photos.photo.models import Photo
 from photos.tags.models import *
+from os import path
 
 def get_tag_model(model, name):
     obj, isnew = model.objects.get_or_create(name=name)
@@ -11,7 +13,8 @@ class Command(NoArgsCommand):
     help = 'Load tags from the kphotoalbum index.'
     
     def handle_noargs(self, **options):
-        source = minidom.parse('/home/kaj/Bilder/foto/index.xml')
+        source = minidom.parse(path.join(settings.PHOTO_STORAGE_BASE,
+                                         'index.xml'))
         for image in source.getElementsByTagName('image'):
             file = image.getAttribute('file')
             if file.startswith('2010'):
