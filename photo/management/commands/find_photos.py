@@ -51,6 +51,7 @@ class Command(NoArgsCommand):
                     try:
                         exif = decode_exif(filename)
                         date = parsedate(exif.get('DateTimeOriginal')) \
+                            or parsedate(exif.get('DateTimeDigitized')) \
                             or parsedate(exif.get('DateTime'))
                         camera = get_camera(exif)
                         #print filename, date, camera
