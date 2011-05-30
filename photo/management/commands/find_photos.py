@@ -21,8 +21,8 @@ def parsedate(datestr):
     if datestr:
         try:
             return datetime.strptime(datestr, '%Y:%m:%d %H:%M:%S')
-        except err:
-            print 'WARNING: Failed to parse date "%s": %s' % (datestr, err)
+        except ValueError:
+            print 'WARNING: Failed to parse date "%s".' % datestr
             return None
     else:
         return None
