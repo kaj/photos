@@ -19,7 +19,11 @@ def decode_exif(filename):
 
 def parsedate(datestr):
     if datestr:
-        return datetime.strptime(datestr, '%Y:%m:%d %H:%M:%S')
+        try:
+            return datetime.strptime(datestr, '%Y:%m:%d %H:%M:%S')
+        except err:
+            print 'WARNING: Failed to parse date "%s": %s' % (datestr, err)
+            return None
     else:
         return None
 
@@ -46,7 +50,8 @@ class Command(NoArgsCommand):
                     filename = os.path.join(root, fn)
                     try:
                         exif = decode_exif(filename)
-                        date = parsedate(exif.get('DateTimeOriginal'))
+                        date = parsedate(exif.get('DateTimeOriginal')) \
+                            or parsedate(exif.get('DateTime'))
                         camera = get_camera(exif)
                         #print filename, date, camera
                         photo, is_new = Photo.objects.get_or_create(
